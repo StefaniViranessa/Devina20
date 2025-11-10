@@ -383,14 +383,44 @@ h1 {
   h1 { font-size: 1.5rem; }
   
   .controls {
-    gap: 4px; /* Kecilkan gap antar tombol */
+    gap: 10px;
   }
   .btn {
-    padding: 6px 8px; /* Kecilkan padding tombol */
-    font-size: 0.8rem;
+    padding: 10px 12px;
+    font-size: 0.9rem;
   }
   .controls input[type="number"] {
-    width: 45px; /* Kecilkan input number */
+    width: 50px;
+  }
+
+  #playMusic,
+  #glowToggle {
+    flex-basis: 100%;
+    width: 100%;
+    text-align: center;
+  }
+
+  #set, #add, #remove {
+    flex-grow: 1;
+  }
+  .controls input[type="number"] {
+    flex-grow: 1.2;
+    min-width: 50px;
+  }
+  .stage {
+    margin-top: 40px; 
+  }
+  .cake-wrap {
+    bottom: 5%; 
+  }
+  #wishModal {
+    padding: 20px 20px 15px 20px;
+  }
+  #wishModal h2 {
+    font-size: 1.8rem;
+  }
+  .wish-text {
+    font-size: 0.95rem;
   }
 }
 
