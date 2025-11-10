@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HBD Devina! 🥳</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&family=Pacifico&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>✨ Happy Birthday Devina! ✨</h1>
+      <div class="controls">
+        <label for="count">Jumlah lilin</label>
+        <input id="count" type="number" min="0" max="20" value="20" />
+        <button id="set" class="btn">Set</button>
+        <button id="add" class="btn secondary">+ 1</button>
+        <button id="remove" class="btn secondary">- 1</button>
+        <button id="playMusic" class="btn">🎵 Play Song</button>
+        <button id="glowToggle" class="btn secondary">✨ Toggle Glow</button>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="scene">
+        <div class="cake-wrap">
+          <div class="candles" id="candles"></div>
+          <div class="plate"></div>
+          <div class="cake" id="cake">
+            <div class="frosting"></div>
+            <div class="cake-body">
+              <div class="message">
+                Happy Birthday<br><span>Devina!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="hint">Klik lilinnya buat tiup. Terus, coba klik kuenya!</p>
+  </div>
+
+  <audio id="birthdaySong" src="hbd-song.mp3" loop></audio>
+
+  <div id="overlay" class="hidden"></div>
+  <div id="wishModal" class="modal hidden">
+    
+    <h2>Happy Birthday, Devina!</h2>
+    
+    <p class="wish-text">
+      Thankyouu for being the Devina yang selalu baik, kritis, dan pengertian.
+      Super happy karena semesta selalu berusaha nunjukkin kalau many people love you.
+      May the world always treat u gently, yaa! Kalau ada downsnya, inget ada grup nangis yaa.
+      Miss u, Depp! Be happy! You deserve all the good things in life!
+      <i>Love you loads!</i> 💖
+    </p>
+    
+    <button id="closeModalBtn" class="btn">Tutup</button>
+    
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

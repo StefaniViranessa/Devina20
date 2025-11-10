@@ -1,0 +1,466 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;700&family=Pacifico&display=swap');
+
+:root {
+  --bg: #1a1024; /* Dark purple bg */
+  --card: #2d1c3f; /* Dark card */
+  --cake: #ff69b4; /* Hot pink cake */
+  --frost: #fff5fb;
+  --plate: #f0f0f0;
+  --choco: #e65fa2;
+  --text: #ffffff; /* White text */
+  --accent: #00f2ea; /* Neon teal accent */
+  --flame-1: #ff7bac;
+  --flame-2: #ffd3a0;
+  --shadow: rgba(0, 242, 234, 0.2); /* Glow shadow */
+  --shadow-dark: rgba(0, 0, 0, 0.2);
+}
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 24px;
+  font-family: 'Fredoka', system-ui, 'Segoe UI', Roboto, Arial;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative; /* Untuk posisi confetti */
+}
+
+.wrap {
+  width: 100%;
+  max-width: 900px;
+  background: var(--card);
+  border-radius: 18px;
+  padding: 20px 24px;
+  box-shadow: 0 0 40px var(--shadow-dark);
+  border: 1px solid var(--accent);
+  transition: box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease-out 0.1s backwards;
+  position: relative;
+  z-index: 10; /* Agar di atas confetti */
+}
+
+/* --- Glow Effect --- */
+.wrap.glowing {
+  --shadow: rgba(0, 242, 234, 0.6);
+  --accent-glow: 0 0 15px var(--accent);
+  box-shadow: 0 0 50px var(--shadow);
+}
+.btn, .cake, .plate, .flame, .candle {
+  transition: all 0.3s ease;
+}
+.wrap.glowing .btn,
+.wrap.glowing .cake {
+  box-shadow: var(--accent-glow), 0 6px 18px var(--shadow-dark);
+}
+.wrap.glowing .btn.secondary {
+  box-shadow: none; /* Secondary buttons don't glow */
+}
+/* --- End Glow --- */
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.top {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+  margin-bottom: 12px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.controls {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.controls label {
+  font-size: 0.9rem;
+  margin-right: -4px;
+}
+
+.controls input[type="number"] {
+  width: 60px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.95rem;
+  font-family: 'Fredoka', system-ui;
+}
+
+.btn {
+  background: var(--accent);
+  color: var(--bg);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 10px;
+}
+
+.scene {
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16/9;
+  position: relative;
+}
+
+.cake-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  width: min(86%, 520px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: translateX(-50%);
+  /* Animation */
+  animation: popIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s backwards;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateX(-50%) scale(0.5); }
+  to { opacity: 1; transform: translateX(-50%) scale(1); }
+}
+
+.plate {
+  width: 100%;
+  height: 36px;
+  background: var(--plate);
+  border-radius: 999px;
+  box-shadow: 0 8px 20px var(--shadow-dark);
+  position: relative;
+  z-index: 1;
+}
+
+.cake {
+  position: relative;
+  bottom: 26px;
+  width: 76%;
+  max-width: 420px;
+  border-radius: 24px;
+  background: var(--cake);
+  box-shadow: inset 0 6px 14px rgba(255, 255, 255, 0.5),
+        0 6px 18px var(--shadow-dark);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  cursor: pointer;
+}
+
+/* --- Cake Jiggle --- */
+.cake.jiggle {
+  animation: jiggle 0.5s ease-in-out;
+}
+@keyframes jiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+/* --- End Jiggle --- */
+
+
+.frosting {
+  width: 100%;
+  height: 18px;
+  background: var(--frost);
+  border-radius: 14px;
+  margin-bottom: 12px;
+  box-shadow: inset 0 -4px 8px rgba(0, 0, 0, 0.03);
+}
+
+.cake-body {
+  width: 92%;
+  height: 86px;
+  background: linear-gradient(180deg, var(--cake), var(--choco));
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.message {
+  font-family: 'Pacifico', cursive;
+  font-weight: 400;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px var(--shadow-dark);
+  text-align: center;
+}
+.message span {
+  font-size: 2rem;
+  color: var(--accent);
+}
+
+
+.candles {
+  position: absolute;
+  top: -68px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  padding: 0 12px;
+}
+
+.candle {
+  width: 14px;
+  height: 54px;
+  background: linear-gradient(180deg, #fff, #ffd9e6);
+  border-radius: 3px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform .14s ease;
+}
+
+.candle:active { transform: translateY(3px); }
+.candle:focus { outline: 2px solid var(--accent); }
+
+.wick {
+  position: absolute;
+  top: -6px;
+  width: 2px;
+  height: 8px;
+  background: #3b2130;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+}
+
+.flame {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 18px;
+  border-radius: 50% 50% 40% 40%;
+  background: radial-gradient(circle at 35% 30%, var(--flame-2) 0 30%, transparent 32%),
+        linear-gradient(180deg, var(--flame-1), var(--flame-2));
+  filter: drop-shadow(0 6px 6px rgba(255, 123, 172, 0.3));
+  transform-origin: center bottom;
+  animation: flicker 1s infinite ease-in-out;
+  z-index: 3;
+}
+
+.flame.small { width: 8px; height: 12px; top: -14px; }
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) scaleY(1); }
+  30% { transform: translateX(-48%) scaleY(1.05) rotate(1deg); }
+  60% { transform: translateX(-52%) scaleY(0.95) rotate(-1deg); }
+  100% { transform: translateX(-50%) scaleY(1); }
+}
+
+.hint {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* --- Confetti container --- */
+.confetti-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Agar tidak mengganggu interaksi lain */
+  overflow: hidden;
+  z-index: 5; /* Di bawah wrap tapi di atas body */
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: var(--confetti-color, #ff69b4); /* Warna default */
+  opacity: 0;
+  animation: fall 3s forwards;
+  border-radius: 50%; /* Bentuk bulat atau persegi */
+}
+.confetti.square {
+  border-radius: 0;
+}
+
+@keyframes fall {
+  0% {
+    transform: translate(var(--x-start), var(--y-start)) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x-end), var(--y-end)) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+  .top {
+    flex-direction: column;
+    align-items: flex-start; /* Ubah ke start agar tidak ke samping */
+  }
+  h1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .controls {
+    width: 100%;
+    justify-content: center; /* Pusatkan controls di mobile */
+  }
+  .controls label {
+    flex-basis: 100%; /* Label ambil 100% lebar */
+    text-align: center;
+  }
+}
+
+@media (max-width: 520px) {
+  .cake { padding: 14px; }
+  .cake-body { height: 72px; }
+  .candles { gap: 8px; top: -54px; }
+  .candle { width: 12px; height: 44px; }
+  
+  .message { font-size: 1.2rem; }
+  .message span { font-size: 1.5rem; }
+  h1 { font-size: 1.5rem; }
+  
+  .controls {
+    gap: 4px; /* Kecilkan gap antar tombol */
+  }
+  .btn {
+    padding: 6px 8px; /* Kecilkan padding tombol */
+    font-size: 0.8rem;
+  }
+  .controls input[type="number"] {
+    width: 45px; /* Kecilkan input number */
+  }
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(26, 16, 36, 0.85); /* BG gelap transparan */
+  backdrop-filter: blur(5px);
+  z-index: 99;
+  opacity: 1;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+#wishModal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: 16px;
+  padding: 30px 30px 24px 30px;
+  z-index: 100;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  opacity: 1;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Ini class 'hidden' yang kita pakai di JS */
+#overlay.hidden,
+#wishModal.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+#wishModal.hidden {
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+#wishModal h2 {
+  font-family: 'Pacifico', cursive;
+  color: var(--accent);
+  font-size: 2.5rem;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* Style untuk teks wish-nya */
+.wish-text {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Style untuk tombol tutup */
+#closeModalBtn {
+  width: 60%; /* Biar gak full-width */
+  margin: 0 auto; /* Posisikan di tengah */
+}
+
+@media (max-width: 520px) {
+  #wishModal h2 {
+    font-size: 2rem;
+  }
+  .wish-text {
+    font-size: 1rem;
+  }
+  #closeModalBtn {
+    width: 80%;
+  }
+}
